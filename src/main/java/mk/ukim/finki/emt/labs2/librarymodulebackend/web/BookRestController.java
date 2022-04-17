@@ -60,4 +60,9 @@ public class BookRestController {
         return Category.values();
     }
 
+    @PostMapping("/books/{id}/take")
+    public String take(@PathVariable Long id) {
+        this.bookService.taken(id);
+        return "redirect:/books";
+    }
 }
