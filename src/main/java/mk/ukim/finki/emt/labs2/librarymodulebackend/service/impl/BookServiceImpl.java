@@ -62,7 +62,8 @@ public class BookServiceImpl implements BookService {
     @Override
     public Book taken(Long id) {
         Book book = findById(id).orElseThrow(() -> new BookNotFoundException(id));
-        book.setAvailableCopies(book.getAvailableCopies() - 1);
+        if(book.getAvailableCopies() <= 0);
+        else book.setAvailableCopies(book.getAvailableCopies() - 1);
         return this.bookRepository.save(book);
     }
 
