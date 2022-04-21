@@ -69,8 +69,10 @@ public class BookRestController {
         return this.authorService.findAll();
     }
 
-    @PostMapping("/books/{id}/take")
-    public void take(@PathVariable Long id) {
-        this.bookService.taken(id);
+    @PostMapping("/books/take/{id}")
+    public ResponseEntity<Book> take(@PathVariable Long id) {
+        return this.bookService.taken(id)
+                .map(book -> ResponseEntity.ok().body(book))
+                .orElseGet(() -> ResponseEntity.badRequest().build());
     }
 }
